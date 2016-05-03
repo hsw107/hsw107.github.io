@@ -1,4 +1,7 @@
-function hide() {document.getElementById('overlay').style.display = 'none';}
+function hide() {
+    document.getElementById('overlay').style.top = '75%';
+    document.getElementById('overlay').style.height = '25%';
+}
 document.getElementById('content').insertAdjacentHTML("afterend", '<div id="overlay" onclick="hide()" style="position:fixed; height: 100%; width: 100%; background: rgba(255,255,255,0.5); top: 0; left: 0; text-align: center;"><div style="position:absolute; font-size:44px; top: 50%; left:0; right:0; text-align:center;">THIS WEBSITE IS NOT FOR COMMERCIAL USE</div></div>')
 
 
