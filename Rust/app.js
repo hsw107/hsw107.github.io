@@ -15,7 +15,7 @@ $(function(){
 			three: getRandomIntInclusive(0,9),
 			four: getRandomIntInclusive(0,9)
 		};
-		if(hasTwin(lastPass) || hasDupPattern(lastPass) || isFourCorners(lastPass) || isCommonYear(lastPass) || isStairAsc(lastPass) || isStairDesc(lastPass)) {
+		if(validate(lastPass)) {
 			console.log(lastPass);
 			generatePass();
 		}
@@ -138,14 +138,14 @@ function isDescending(code) {
 }
 
 function isStairAsc(code) {
-	var isValid = (code.four - 1 == code.three && code.three - 1 === code.two) || (code.three - 1 == code.two && code.two - 1 === code.one)
-	if(isValid) console.log('%c Invalid pass: is stair asc', 'background: #222; color: #bada55');
+	var isValid = (code.four - 1 == code.three && code.three - 1 === code.two) || (code.three - 1 == code.two && code.two - 1 === code.one);
+	if(isValid) console.log('Invalid pass: is stair asc');
 	return isValid;
 }
 
 function isStairDesc(code) {
-	var isValid = (code.one - 1 == code.two && code.two - 1 === code.three) || (code.two - 1 == code.three && code.three - 1 === code.four)
-	if(isValid) console.log('%c Invalid pass: is stair desc', 'background: #222; color: #bada55');
+	var isValid = (code.one - 1 == code.two && code.two - 1 === code.three) || (code.two - 1 == code.three && code.three - 1 === code.four);
+	if(isValid) console.log('Invalid pass: is stair desc');
 	return isValid;
 }
 
@@ -156,8 +156,19 @@ function isFourCorners(code) {
     }
     //If the length is 0, then we know the code was all 4 corners
 	var isValid = cornerArr.length === 0;
-    if(isValid) console.log('%c Invalid pass: is four corners', 'background: #222; color: red');
+    if(isValid) console.log('Invalid pass: is four corners');
 	return isValid;
+}
+
+function isPlusPattern(code) {
+    var cornerArr = [2,6,8,4];
+    for(var item in code) {
+        cornerArr = cornerCheck(cornerArr, code[item]);
+    }
+    //If the length is 0, then we know the code was all 4 corners
+    var isValid = cornerArr.length === 0;
+    if(isValid) console.log('%c Invalid pass: is plus pattern', 'background: #222; color: red');
+    return isValid;
 }
 
 //	var isValid = (code.one > code.two && code.two > code.three) || (code.two > code.three && code.three > code.four);
@@ -175,6 +186,32 @@ function cornerCheck(arr, a) {
 	return arr;
 }
 
+function isLShaped(passcode) {
+    var isValid = false;
+    var code = '' + passcode.one + passcode.two + passcode.three + passcode.four;
+    var exactChecks = ['7410', '0147', '1478', '8741', '8963', '3698', '2369', '9632', '2147', '7412'];
+    exactChecks.forEach(function(value){
+        if(code === value) {
+            isValid = true;
+        }
+    });
+    if(isValid) console.log('%c Invalid pass: is L shape', 'background: #222; color: red');
+    return isValid;
+}
+
+function validate(passcode) {
+    return hasTwin(passcode) || hasDupPattern(passcode) || isFourCorners(passcode) || isCommonYear(passcode) || isStairAsc(passcode) || isStairDesc(passcode) || isPlusPattern(passcode) || isLShaped(passcode);
+}
+
+function convertToPasscode(num) {
+    var split = num.toString().split('');
+    return {
+        one: parseInt(split[0]),
+        two: parseInt(split[1]),
+        three: parseInt(split[2]),
+        four: parseInt(split[3]),
+    }
+}
 function ConvertToCSV(objArray) {
     var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
     var str = '';
