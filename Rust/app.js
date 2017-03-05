@@ -61,7 +61,11 @@ $(function(){
         $('.four').text('');
         var passcode = {};
         passcode.name = name;
-        passcode.code = '' + lastPass.one + lastPass.two + lastPass.three + lastPass.four;
+        passcode.code = '';
+        passcode.code += lastPass.one;
+        passcode.code += lastPass.two;
+        passcode.code += lastPass.three;
+        passcode.code += lastPass.four;
         passcodes.push(passcode);
         localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(passcodes));
         lastPass = undefined;
