@@ -1,0 +1,69 @@
+body {
+    min-width: 600px;
+}
+.name_kept {
+    display:inline-block;
+    margin-left: 10px;
+    line-height: 50px;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 33px;
+    vertical-align: top;
+    background: rgba(143,143,143,0.23);
+    color:#5a5a58;
+    opacity:0.8;
+    padding: 5px;
+    box-sizing: border-box;
+    text-transform: capitalize;
+}
+.name_kept:empty {
+    padding:0;
+}
+.num {
+    height:60px;
+    width: 60px;
+    background: rgba(143,143,143,0.23);
+    display:inline-block;
+    text-align: center;
+    line-height: 60px;
+    font-family: consolas;
+    margin-right: 1px;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    color:#5a5a58;
+    font-size:50px;
+    opacity:0.8;
+}
+
+.smallText {
+    margin-top:10px;
+    font-size:10px;
+}
+
+.deleteCode {
+    visibility: hidden;
+    display:inline-block;
+    vertical-align: top;
+    line-height: 60px;
+    font-size: 20px;
+    color: #656565;
+    margin-right: 10px;
+    transition: color 0.25s;
+}
+
+.deleteCode:hover {
+    cursor:pointer;
+    color:red;
+}
+
+.line {
+    white-space: nowrap;
+}
+.line:hover .deleteCode {
+    visibility: visible;
+}
+#kept .line {
+    margin-top: 1px;
+}
+input {
+    text-transform: capitalize;
+}
