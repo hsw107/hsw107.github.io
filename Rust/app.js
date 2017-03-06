@@ -1,7 +1,7 @@
+var debug = false;
 var LOCALSTORAGE_KEY = 'rustPasscodes';
 var passcodes = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY)) || [];
 $(function(){
-	console.log(passcodes);
 	passcodes.forEach(function(unformPass){
 		var splitPass = unformPass.code.split('');
 		var formattedPass = {one: splitPass[0], two:splitPass[1], three: splitPass[2], four: splitPass[3] };
@@ -16,7 +16,6 @@ $(function(){
 			four: getRandomIntInclusive(0,9)
 		};
 		if(validate(lastPass)) {
-			console.log(lastPass);
 			generatePass();
 		}
 	}
@@ -28,11 +27,10 @@ $(function(){
         $('.two').text(lastPass.two);
         $('.three').text(lastPass.three);
         $('.four').text(lastPass.four);
-        console.log(lastPass);
     }
     function renderCode(pass, name) {
         $('#kept').append('<div class="line">'
-			+ '<div title="deletes the passcode" class="deleteCode">✖</div>'
+			+ '<div title="deletes the passcode" class="deleteCode glyphicon glyphicon-remove"></div>'
 			+ '<span class="one_kept num">' + pass.one + '</span>'
             + '<span class="two_kept num">' + pass.two + '</span>'
             + '<span class="three_kept num">' + pass.three + '</span>'
@@ -88,7 +86,6 @@ $(function(){
         deleteAll();
     });
 
-
     $('#kept').on('click', '.deleteCode', function(){
     	passcodes.splice($(this).parent().index(), 1);
         localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(passcodes));
@@ -116,36 +113,25 @@ function getRandomIntInclusive(min, max) {
 
 function hasTwin(code) {
 	var isValid = code.one === code.two || code.two === code.three || code.three === code.four;
-	if(isValid) console.log('Invalid pass: has twin');
+	if(isValid && debug) console.log('Invalid pass: has twin');
 	return isValid;
 }
 
 function hasDupPattern(code) {
 	var isValid = code.one + '' + code.two === code.three + '' + code.four;
-	if(isValid) console.log('Invalid pass: has pattern');
-	return isValid;
-}
-function isAscending(code) {
-	var isValid = code.one < code.two && code.two < code.three && code.three < code.four;
-	if(isValid) console.log('Invalid pass: is asc');
-	return isValid;
-}
-
-function isDescending(code) {
-	var isValid = code.one > code.two && code.two > code.three && code.three > code.four;
-	if(isValid) console.log('Invalid pass: is desc');
+	if(isValid && debug) console.log('Invalid pass: has pattern');
 	return isValid;
 }
 
 function isStairAsc(code) {
 	var isValid = (code.four - 1 == code.three && code.three - 1 === code.two) || (code.three - 1 == code.two && code.two - 1 === code.one);
-	if(isValid) console.log('Invalid pass: is stair asc');
+	if(isValid && debug) console.log('Invalid pass: is stair asc');
 	return isValid;
 }
 
 function isStairDesc(code) {
 	var isValid = (code.one - 1 == code.two && code.two - 1 === code.three) || (code.two - 1 == code.three && code.three - 1 === code.four);
-	if(isValid) console.log('Invalid pass: is stair desc');
+	if(isValid && debug) console.log('Invalid pass: is stair desc');
 	return isValid;
 }
 
@@ -156,7 +142,7 @@ function isFourCorners(code) {
     }
     //If the length is 0, then we know the code was all 4 corners
 	var isValid = cornerArr.length === 0;
-    if(isValid) console.log('Invalid pass: is four corners');
+    if(isValid && debug) console.log('Invalid pass: is four corners');
 	return isValid;
 }
 
@@ -167,7 +153,7 @@ function isPlusPattern(code) {
     }
     //If the length is 0, then we know the code was all 4 corners
     var isValid = cornerArr.length === 0;
-    if(isValid) console.log('%c Invalid pass: is plus pattern', 'background: #222; color: red');
+    if(isValid && debug) console.log('%c Invalid pass: is plus pattern', 'background: #222; color: red');
     return isValid;
 }
 
@@ -176,7 +162,7 @@ function isPlusPattern(code) {
 function isCommonYear(code) {
 	var totalCode = parseInt(code.one + '' + code.two + code.three + '' + code.four);
 	var isValid = totalCode > 1700 && totalCode < (new Date()).getYear() + 1910;
-	if(isValid) console.log('Invalid pass: is year ');
+	if(isValid && debug) console.log('Invalid pass: is year ');
 	return isValid;
 }
 
@@ -195,7 +181,7 @@ function isLShaped(passcode) {
             isValid = true;
         }
     });
-    if(isValid) console.log('%c Invalid pass: is L shape', 'background: #222; color: red');
+    if(isValid && debug) console.log('%c Invalid pass: is L shape', 'background: #222; color: red');
     return isValid;
 }
 
@@ -226,6 +212,5 @@ function ConvertToCSV(objArray) {
 
         str += line + '\r\n';
     }
-
     return str;
 }

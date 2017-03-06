@@ -18,7 +18,8 @@
       src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
       integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
       crossorigin="anonymous"></script>
-	<script src="app.js?v=03052017"></script>
+	<script src="app.js"></script>
+	<script src="js/bootstrap.js"></script>
     <link rel="stylesheet" href="style.css"/>
     <link rel="stylesheet" href="css/bootstrap.css"/>
 </head>
@@ -27,26 +28,42 @@
         <div class="row">
             <div class="col-xs-6">
                 <h1>Rust Code Lock Passcode Generator</h1>
-                <h4>Helping you create and remember random passcodes since 2017.</h4>
+                <h3><small>Helping you create and remember random passcodes since 2017.</small></h3>
                 <div class="form-group">
                     <label>
-                        Name passcode:
+                        Name/Label passcode:
                         <input autofocus class="form-control" id="name" type="text" maxlength="24"/>
                     </label>
                 </div>
                 <div>
                     <span class="one num"></span><span class="two num"></span><span class="three num"></span><span class="four num"></span>
                 </div>
-                <h2>&nbsp;</h2>
+                <br/>
 
                 <button class="btn btn-primary" id="generate">Generate passcode</button>
                 <button class="btn btn-success" id="keep">Save passcode</button>
                 <br/><br/>
-                <h3>Additional Information:</h3>
-                <p>This app will generate a code for your code locks in Rust that should not be human guessable. Often times players pick easy to remember codes like <code>6969</code>, <code>1337</code>  or <code>2017</code> or fallback to their bank PIN which means other players can guess their codes easily or players end up giving up sensitive information to thep layers they share bases with. With the introduction of guest codes, coming up with unique codes becomes even more important.</p>
-                <p>This generator will take into account repeating numbers, easy patterns such as back-to-back ascending/descending numbers (<code>1235</code>/<code>9876</code>), duplicate patterns such as <code>1313</code> or <code>2336</code>, years (<code>1991</code>, <code>2016</code>) and patterns like the four corners (<code>1379</code>, <code>9137</code>).</p>
-                <p class="smallText">&copy; 2017 <a href="https://github.com/jwa107/RustCodeLockCodeGenerator">jwa107</a>. This app is not associated with Rust or Facepunch Studios in any way. This is just a fan-made site for fun.</p>
-            </div>
+
+                <button class="btn btn-link" id="addInfo" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Additional Information <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <div class="collapse" id="collapseExample">
+                    <div class="well">
+                        <p>This app will generate a code for your code locks in Rust that should not be human guessable. Often times players pick easy to remember codes like <code>6969</code>, <code>1337</code>  or <code>2017</code> or fallback to their bank PIN which means other players can guess their codes easily or players end up giving up sensitive information to thep layers they share bases with. With the introduction of guest codes, coming up with and remembering unique codes becomes even more important.</p>
+                        <p>This generator will take into account:
+                            <ul>
+                                <li>Ascending/descending numbers (<code>1235</code>, <code>9876</code>)</li>
+                                <li>Repeating/duplicate patterns (<code>1313</code>, <code>2336</code>)</li>
+                                <li>Years (<code>1991</code>, <code>2016</code>)</li>
+                                <li>Four corners (<code>1379</code>, <code>9137</code>)</li>
+                                <li>Edges (<code>4862</code>, <code>2864</code>)</li>
+                                <li>L shaped patterns (<code>7410</code>, <code>8963</code>)</li>
+                            </ul>
+                    </div>
+                </div>
+                        <p class="smallText">&copy; 2017 <a href="https://github.com/jwa107/RustCodeLockCodeGenerator">jwa107</a>. This app is not associated with Rust or Facepunch Studios in any way. This is just a fan-made site for fun.</p>
+                        <p class="smallText">Made with love, <a href="http://getbootstrap.com">Bootstrap</a> and <a href="http://glyphicons.com/">Glyphicons</a>.</p>
+                 </div>
             <div class="col-xs-6">
                 <h1>Saved Codes</h1>
                 <button class="btn btn-link" id="export">Export to CSV</button>
